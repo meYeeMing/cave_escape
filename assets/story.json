@@ -1,0 +1,415 @@
+{
+	"nodes": [
+		{
+			"nodeId": 0,
+			"text": "You wake .up in a dark cave with no memory of how you got here. Your head hurts and the air is damp and cold. A faint light flickers in the distance. What do you do?",
+			"imageId": 0,
+			"choices": [
+				{
+					"text": "Move toward the light",
+					"nextNodeId": 1
+				},
+				{
+					"text": "Feel around for items nearby",
+					"nextNodeId": 2
+				},
+				{
+					"text": "Call out for help",
+					"nextNodeId": 3
+				}
+			]
+		},
+		{
+			"nodeId": 1,
+			"text": "You carefully move toward the light. As you get closer, you realize it's a small torch embedded in the cave wall. The path splits into three directions.",
+			"imageId": 0,
+			"choices": [
+				{
+					"text": "Take the left path",
+					"nextNodeId": 4
+				},
+				{
+					"text": "Take the right path",
+					"nextNodeId": 5
+				},
+				{
+					"text": "Continue straight ahead cautiously",
+					"nextNodeId": 6
+				}
+			]
+		},
+		{
+			"nodeId": 2,
+			"text": "As you feel around in the darkness, your hand touches something cold and metallic. It's an old lantern! You also find some matches nearby.",
+			"imageId": 2,
+			"choices": [
+				{
+					"text": "Light the lantern",
+					"nextNodeId": 7
+				},
+				{
+					"text": "Continue feeling around for more items in the dark",
+					"nextNodeId": 8
+				}
+			],
+			"isQuiz": true,
+			"quizAnswer": 0,
+			"quizFeedback": "Smart choice! The lantern illuminates the cave, making it easier to navigate."
+		},
+		{
+			"nodeId": 3,
+			"text": "Your voice echoes through the cave, but there's no response. However, the echo gives you a sense of the cave's dimensions. It seems vast. Suddenly, you hear a faint rumbling sound.",
+			"imageId": 9,
+			"choices": [
+				{
+					"text": "Stay quiet and listen carefully",
+					"nextNodeId": 9
+				},
+				{
+					"text": "Call out again, louder, hoping for a response",
+					"nextNodeId": 10
+				}
+			]
+		},
+		{
+			"nodeId": 4,
+			"text": "The left path narrows as you walk. After a few minutes, you come across a small underground stream. The water looks clean, and you're feeling thirsty.",
+			"imageId": 4,
+			"choices": [
+				{
+					"text": "Drink greedily from the stream without checking for impurities",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Follow the stream's direction",
+					"nextNodeId": 12
+				},
+				{
+					"text": "Walk against the stream's flow",
+					"nextNodeId": 13
+				}
+			],
+			"isQuiz": true,
+			"quizAnswer": 1,
+			"quizFeedback": "Great decision! Streams often lead to exits in cave systems."
+		},
+		{
+			"nodeId": 5,
+			"text": "The right path slopes upward. As you climb, the air becomes fresher. You notice some ancient carvings on the wall depicting people escaping from something.",
+			"imageId": 5,
+			"choices": [
+				{
+					"text": "Examine the carvings closely",
+					"nextNodeId": 14
+				},
+				{
+					"text": "Continue climbing upward rapidly without looking for stable footing",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Return and try another path",
+					"nextNodeId": 1
+				}
+			]
+		},
+		{
+			"nodeId": 6,
+			"text": "The straight path leads to a large cavern with multiple tunnels. In the center is a stone pedestal with three colored gems: red, blue, and green. There's an inscription: 'Choose wisely to find your way.'",
+			"imageId": 6,
+			"choices": [
+				{
+					"text": "Take the red gem",
+					"nextNodeId": 16
+				},
+				{
+					"text": "Take the blue gem",
+					"nextNodeId": 17
+				},
+				{
+					"text": "Take the green gem",
+					"nextNodeId": 18
+				}
+			],
+			"isQuiz": true,
+			"quizAnswer": 2,
+			"quizFeedback": "The green gem glows warmly in your hand. Green often symbolizes life and growth - perhaps it will lead to an exit!"
+		},
+		{
+			"nodeId": 7,
+			"text": "You light the lantern, illuminating your surroundings. You're in a small chamber with ancient mining equipment. There are two passages leading out.",
+			"imageId": 7,
+			"choices": [
+				{
+					"text": "Take the passage with fresh air",
+					"nextNodeId": 19
+				},
+				{
+					"text": "Tamper carelessly with the unstable-looking mining equipment",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Take the passage with footprints",
+					"nextNodeId": 1
+				}
+			],
+			"isQuiz": true,
+			"quizAnswer": 0,
+			"quizFeedback": "Fresh air is a good sign that this passage might lead outside!"
+		},
+		{
+			"nodeId": 8,
+			"text": "Continuing your search, you find an old miner's helmet with a broken light and a dusty journal. The journal mentions a 'hidden exit behind the waterfall.'",
+			"imageId": 8,
+			"choices": [
+				{
+					"text": "Put on the helmet and move toward the light",
+					"nextNodeId": 1
+				},
+				{
+					"text": "Read more of the journal",
+					"nextNodeId": 9
+				},
+				{
+					"text": "Ignore the journal and start randomly smashing walls with a rock",
+					"nextNodeId": 999
+				}
+			]
+		},
+		{
+			"nodeId": 9,
+			"text": "You stay perfectly still and listen. The rumbling gets louder, then subsides. You notice a pattern - it seems to be coming from deeper in the cave at regular intervals.",
+			"imageId": 9,
+			"choices": [
+				{
+					"text": "Move away from the rumbling",
+					"nextNodeId": 4
+				},
+				{
+					"text": "Try to find the source of the rumbling immediately without caution",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Wait for the next rumble to gauge direction",
+					"nextNodeId": 10
+				}
+			]
+		},
+		{
+			"nodeId": 10,
+			"text": "You sprint toward the light in panic. The ground beneath you is uneven, and suddenly you trip! As you fall, your hand catches on a protruding rock, revealing a hidden passage underneath.",
+			"imageId": 10,
+			"choices": [
+				{
+					"text": "Explore the hidden passage",
+					"nextNodeId": 11
+				},
+				{
+					"text": "Rest for a moment before deciding",
+					"nextNodeId": 3
+				}
+			]
+		},
+		{
+			"nodeId": 11,
+			"text": "You drink from the stream. The water is refreshing, but minutes later, you feel dizzy. The water must contain minerals that affect your perception. Your vision blurs slightly.",
+			"imageId": 4,
+			"choices": [
+				{
+					"text": "Rest until the dizziness passes",
+					"nextNodeId": 12
+				},
+				{
+					"text": "Keep moving rapidly despite the dizziness",
+					"nextNodeId": 999
+				}
+			]
+		},
+		{
+			"nodeId": 12,
+			"text": "Following the stream, you notice it getting wider. The sound of rushing water grows louder. Soon, you arrive at an underground waterfall that drops into a large pool.",
+			"imageId": 12,
+			"choices": [
+				{
+					"text": "Look for a way around the waterfall",
+					"nextNodeId": 13
+				},
+				{
+					"text": "Attempt to swim across the deep pool without knowing the depth or currents",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Check behind the waterfall",
+					"nextNodeId": 19
+				}
+			]
+		},
+		{
+			"nodeId": 13,
+			"text": "You find a narrow ledge that goes around the waterfall. It's slippery but passable with care. After making your way around, you find a small chamber with strange glowing mushrooms.",
+			"imageId": 13,
+			"choices": [
+				{
+					"text": "Eat one of the glowing mushrooms immediately",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Go back and check waterfall",
+					"nextNodeId": 12
+				},
+				{
+					"text": "Continue past the mushroom chamber cautiously",
+					"nextNodeId": 14
+				}
+			]
+		},
+		{
+			"nodeId": 14,
+			"text": "The carvings tell a story: ancient people used these caves for shelter during some catastrophe above ground. They depict a safe exit marked by three stalagmites forming a triangle.",
+			"imageId": 14,
+			"choices": [
+				{
+					"text": "Look for the three stalagmites",
+					"nextNodeId": 15
+				},
+				{
+					"text": "Return and try another path",
+					"nextNodeId": 5
+				}
+			]
+		},
+		{
+			"nodeId": 15,
+			"text": "As you search, you find three large stalagmites arranged in a triangle. Beyond them, you feel a gentle breeze coming from a narrow crevice with natural light streaming through!",
+			"imageId": 15,
+			"choices": [
+				{
+					"text": "Try to squeeze through the crevice",
+					"nextNodeId": 100
+				},
+				{
+					"text": "Force yourself through the crevice without checking if it's stable",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Check if there's another way around",
+					"nextNodeId": 5
+				}
+			]
+		},
+		{
+			"nodeId": 16,
+			"text": "As you take the red gem, it grows warm in your hand. Suddenly, the cavern begins to shake violently! The gem glows brighter and hotter, burning your hand.",
+			"imageId": 16,
+			"choices": [
+				{
+					"text": "Drop the gem and run",
+					"nextNodeId": 6
+				},
+				{
+					"text": "Hold onto the gem, believing it will grant you power despite the pain",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Put the gem back on the pedestal immediately",
+					"nextNodeId": 6
+				}
+			]
+		},
+		{
+			"nodeId": 17,
+			"text": "The blue gem feels cool to the touch. As you hold it, you hear the distant sound of running water and one of the tunnels begins to glow with a blue light.",
+			"imageId": 17,
+			"choices": [
+				{
+					"text": "Follow the blue-lit path",
+					"nextNodeId": 12
+				},
+				{
+					"text": "Put the gem back and choose another",
+					"nextNodeId": 6
+				},
+				{
+					"text": "Try to drink the liquid that seems to emanate from the gem",
+					"nextNodeId": 999
+				}
+			]
+		},
+		{
+			"nodeId": 18,
+			"text": "The green gem pulses with a gentle light. You feel a slight breeze from one of the tunnels, and moss on the walls begins to glow green, marking a path.",
+			"imageId": 18,
+			"choices": [
+				{
+					"text": "Follow the green-lit path",
+					"nextNodeId": 15
+				},
+				{
+					"text": "Put the gem back and choose another",
+					"nextNodeId": 6
+				}
+			]
+		},
+		{
+			"nodeId": 19,
+			"text": "Behind the waterfall, you discover a hidden cavern with ancient stone steps leading upward. Following them, you eventually see daylight!",
+			"imageId": 19,
+			"choices": [
+				{
+					"text": "Climb the steps to freedom",
+					"nextNodeId": 100
+				},
+				{
+					"text": "Linger in the cavern, convinced there's more treasure despite the obvious exit",
+					"nextNodeId": 8
+				},
+				{
+					"text": "Rest before making the final ascent",
+					"nextNodeId": 100
+				}
+			]
+		},
+		{
+			"nodeId": 20,
+			"text": "Among the mining equipment, you find an old pickaxe and a miner's map. The map is faded, but you can make out a few key landmarks.",
+			"imageId": 20,
+			"choices": [
+				{
+					"text": "Try to decipher the map carefully",
+					"nextNodeId": 9
+				},
+				{
+					"text": "Start swinging the pickaxe wildly at the walls",
+					"nextNodeId": 999
+				},
+				{
+					"text": "Start swinging the pickaxe wildly at the walls",
+					"nextNodeId": 7
+				}
+			]
+		},
+		{
+			"nodeId": 100,
+			"text": "Congratulations! You've successfully escaped the cave. Fresh air fills your lungs as you step into the sunlight. Your adventure in the darkness has come to an end, but the memories of your clever decisions will remain.",
+			"imageId": 100,
+			"choices": [
+				{
+					"text": "Play Again",
+					"nextNodeId": 9999
+				}
+			],
+			"isVictory": true
+		},
+		{
+			"nodeId": 999,
+			"text": "Unfortunately, your journey ends here. The cave has claimed another victim. But don't worry, you can always try again with different choices!",
+			"imageId": 99,
+			"choices": [
+				{
+					"text": "Try Again",
+					"nextNodeId": 9999
+				}
+			],
+			"isGameOver": true
+		}
+	]
+}
