@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cave_escape/models/story_choice_model.dart';
+import 'package:cave_escape/utils/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import '../models/image.dart';
@@ -13,6 +14,7 @@ class AssetLoader {
     int completedTasks = 0;
 
     //load game image list
+    logger.i('load image to hive');
     final imageListJson = await rootBundle.loadString('assets/image_list.json');
     final imageJson = jsonDecode(imageListJson)['imageList'];
     final imageBox = await Hive.openBox<ImageMapping>('imageBox');
@@ -27,14 +29,21 @@ class AssetLoader {
     progressCallback(progress);
 
     //load story node
+    logger.i('load story node to hive');
     final nodeString = await rootBundle.loadString('assets/story.json');
     final nodeJson = jsonDecode(nodeString)['nodes'];
     final nodeBox = await Hive.openBox<StoryNodeModel>('nodeBox');
+    //total 23 nodes
     for (var nodeJson in nodeJson) {
       final node = _parseNode(nodeJson);
       await nodeBox.put(node.id, node);
     }
 
+    completedTasks++;
+    progress = completedTasks / totalTasks;
+    progressCallback(progress);
+
+    logger.i('check any game state in hive.');
     final gameBox = await Hive.openBox<GameStateModel>('gameStateBox');
     bool hasData = gameBox.isNotEmpty;
     List<GameStateModel> allRecords = gameBox.values.toList();
@@ -57,7 +66,7 @@ class AssetLoader {
         choicesJson.map((e) => _parseChoice(e)).toList();
 
     return StoryNodeModel(
-      id: json['id'],
+      id: json['nodeId'],
       text: json['text'],
       imageId: int.parse(json['imageId'].toString()),
       choices: choices,
