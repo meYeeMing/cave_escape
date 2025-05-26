@@ -6,7 +6,12 @@ class GameHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Welcome to the Game')),
+      body: Center(
+        child: Text(
+          'Welcome to the Game',
+          style: TextStyle(fontFamily: 'Dirtyboy', fontSize: 20),
+        ),
+      ),
     );
   }
 }

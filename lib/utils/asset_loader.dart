@@ -8,49 +8,67 @@ import '../models/game_state_model.dart';
 import '../models/story_node_model.dart';
 
 class AssetLoader {
-  Future<void> loadAllAssets(Function(double) progressCallback) async {
-    double progress = 0.0;
-    int totalTasks = 3; // number of different asset types
-    int completedTasks = 0;
+  final List<void Function(double)> progressCallbacks = [];
+
+  void addProgressCallback(void Function(double) callback) {
+    progressCallbacks.add(callback);
+  }
+
+  late double _progress;
+  late int _completedTasks;
+  late int _totalTasks;
+
+  void _updateProgress() {
+    _completedTasks++;
+    _progress = _completedTasks / _totalTasks;
+    for (var callback in progressCallbacks) {
+      callback(_progress);
+    }
+  }
+
+  Future<void> loadAllAssets([void Function(double)? onProgress]) async {
+    if (onProgress != null) addProgressCallback(onProgress);
+
+    _totalTasks = 7;
+    _progress = 0.0;
+    _completedTasks = 0;
 
     //load game image list
     logger.i('load image to hive');
     final imageListJson = await rootBundle.loadString('assets/image_list.json');
     final imageJson = jsonDecode(imageListJson)['imageList'];
+    _updateProgress();
     final imageBox = await Hive.openBox<ImageMapping>('imageBox');
+    _updateProgress();
     for (var item in imageJson) {
       await imageBox.put(
         item['id'],
         ImageMapping(id: item['id'], imageFile: item['imageFile']),
       );
     }
-    completedTasks++;
-    progress = completedTasks / totalTasks;
-    progressCallback(progress);
+
+    _updateProgress();
 
     //load story node
     logger.i('load story node to hive');
     final nodeString = await rootBundle.loadString('assets/story.json');
     final nodeJson = jsonDecode(nodeString)['nodes'];
+    _updateProgress();
     final nodeBox = await Hive.openBox<StoryNodeModel>('nodeBox');
+    _updateProgress();
     //total 23 nodes
     for (var nodeJson in nodeJson) {
       final node = _parseNode(nodeJson);
       await nodeBox.put(node.id, node);
     }
-
-    completedTasks++;
-    progress = completedTasks / totalTasks;
-    progressCallback(progress);
+    _updateProgress();
 
     logger.i('check any game state in hive.');
     final gameBox = await Hive.openBox<GameStateModel>('gameStateBox');
     bool hasData = gameBox.isNotEmpty;
     List<GameStateModel> allRecords = gameBox.values.toList();
 
-    completedTasks++;
-    progress = completedTasks / totalTasks;
-    progressCallback(progress);
+    _updateProgress();
   }
 
   StoryChoiceModel _parseChoice(Map<String, dynamic> json) {
