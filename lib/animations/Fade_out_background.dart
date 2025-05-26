@@ -14,7 +14,7 @@ class FadeBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: fadeOut ? 0.0 : 0.8,
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 800),
       curve: Curves.easeInOut,
       child: Image.asset(
         imagePath,

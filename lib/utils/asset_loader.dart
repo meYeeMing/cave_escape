@@ -29,9 +29,21 @@ class AssetLoader {
   Future<void> loadAllAssets([void Function(double)? onProgress]) async {
     if (onProgress != null) addProgressCallback(onProgress);
 
-    _totalTasks = 7;
+    _totalTasks = 10;
     _progress = 0.0;
     _completedTasks = 0;
+
+    // Preload splash image
+    await rootBundle.load('assets/images/splash_image.webp');
+    _updateProgress();
+
+    // Preload game home screen image
+    await rootBundle.load('assets/images/game_home_screen.webp');
+    _updateProgress();
+
+    // Preload logo image
+    await rootBundle.load('assets/images/game_logo.webp'); // Change path if needed
+    _updateProgress();
 
     //load game image list
     logger.i('load image to hive');

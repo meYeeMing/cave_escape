@@ -31,11 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     setState(() {
-      _fadeOut = true; // Start fading out after loading assets
+      _fadeOut = true;
     });
-
-    // After loading, navigate to main screen
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 700));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => GameHomeScreen()),
@@ -55,33 +53,71 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Padding(
               padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.05,
                 bottom: MediaQuery.of(context).size.height * 0.1,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Game is Starting..",
-                      style: TextStyle(fontFamily: 'Dirtyboy', fontSize: 60),
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          height: 250,
+                          child: FadeBackground(
+                            imagePath: 'assets/images/game_logo.webp',
+                            fadeOut: _fadeOut,
+                          ),
+                        ),
+                        //const SizedBox(height: 3),
+              
+                        Text(
+                          "Text Adventure",
+                          style: TextStyle(
+                            fontFamily: 'Dirtyboy',
+                            fontSize: 45,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${(100 * _progress).toInt()}%',
-                      style: TextStyle(fontFamily: 'Dirtyboy', fontSize: 35),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  LinearProgressIndicator(
-                    value: _progress,
-                    backgroundColor: AppColors.stone,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.accentGold,
-                    ),
-                    minHeight: 20.0,
+                  const Spacer(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Game is Starting..",
+                          style: TextStyle(
+                            fontFamily: 'Dirtyboy',
+                            fontSize: 60,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${(100 * _progress).toInt()}%',
+                          style: TextStyle(
+                            fontFamily: 'Dirtyboy',
+                            fontSize: 35,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      LinearProgressIndicator(
+                        value: _progress,
+                        backgroundColor: AppColors.stone,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.parchment,
+                        ),
+                        minHeight: 20.0,
+                      ),
+                    ],
                   ),
                 ],
               ),
