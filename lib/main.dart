@@ -1,4 +1,4 @@
-import 'package:cave_escape/theme/app_colors.dart';
+import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/utils/logger.dart';
 import 'package:cave_escape/models/game_state_model.dart';
 import 'package:cave_escape/models/image.dart';

@@ -1,4 +1,6 @@
+import 'package:cave_escape/widgets/splash_welcome_message.dart';
 import 'package:flutter/material.dart';
+import 'package:cave_escape/animations/fade_effect.dart';
 
 class GameHomeScreen extends StatefulWidget {
   const GameHomeScreen({super.key});
@@ -35,19 +37,14 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                AnimatedOpacity(
-                  opacity: _opacity,
+                FadeEffect(
+                  fadetype: FadeType.fadeOut,
+                  fadeTrigger: true,
+                  endOpacity: _opacity,
                   duration: const Duration(milliseconds: 1000),
-                  curve: Curves.easeIn,
                   child: Image.asset(
                     'assets/images/game_home_screen.webp',
                     fit: BoxFit.cover,
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Welcome to the Game',
-                    style: TextStyle(fontFamily: 'Dirtyboy', fontSize: 60),
                   ),
                 ),
               ],

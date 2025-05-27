@@ -95,9 +95,9 @@ flutter:
     - family: Dirtyboy
       fonts:
         - asset: assets/fonts/Dirtyboy.ttf
-    - family: CaveStone
+    - family: Cavestone
       fonts:
-        - asset: assets/fonts/CaveStone.ttf
+        - asset: assets/fonts/Cavestone.ttf
 
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
