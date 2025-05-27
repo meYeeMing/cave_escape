@@ -9,6 +9,7 @@ import '../models/story_node_model.dart';
 
 class AssetLoader {
   final List<void Function(double)> progressCallbacks = [];
+  static String? cachedCaveSoundPath;
 
   void addProgressCallback(void Function(double) callback) {
     progressCallbacks.add(callback);
@@ -42,7 +43,9 @@ class AssetLoader {
     _updateProgress();
 
     // Preload logo image
-    await rootBundle.load('assets/images/game_logo.webp'); // Change path if needed
+    await rootBundle.load(
+      'assets/images/game_logo.webp',
+    ); // Change path if needed
     _updateProgress();
 
     //load game image list
@@ -81,6 +84,7 @@ class AssetLoader {
     List<GameStateModel> allRecords = gameBox.values.toList();
 
     _updateProgress();
+
   }
 
   StoryChoiceModel _parseChoice(Map<String, dynamic> json) {

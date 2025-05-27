@@ -1,4 +1,3 @@
-import 'package:cave_escape/animations/fade_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:cave_escape/theme/app_styles.dart';
 
@@ -60,7 +59,7 @@ class SplashWelcomeMessage extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    '\n\n\nTo ensure you experience every detail of this perilous journey, please smaller your browser\'s screen resolution to 877 x 1299. ',
+                    '\n\n\nTo ensure you experience every detail of this perilous journey, we recommend playing at browser\'s screen resolution to 1000 x 1280. ',
                     style: AppStyles.subtleEmphasis,
                     textAlign: TextAlign.center,
                   ),
