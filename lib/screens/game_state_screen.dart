@@ -41,8 +41,8 @@ class _GameStateScreenState extends State<GameStateScreen> {
       if (a.win != b.win) {
         return b.win ? 1 : -1; // win=true first
       }
-      return (a.completionTimeInSeconds ?? 0).compareTo(
-        b.completionTimeInSeconds ?? 0,
+      return a.completionTimeInSeconds.compareTo(
+        b.completionTimeInSeconds,
       );
     });
     return gameStates;
