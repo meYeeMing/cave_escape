@@ -8,10 +8,10 @@ class GameStateModel {
   final int id;
 
   @HiveField(1)
-  bool winLoss;
+  bool win;
 
   @HiveField(2)
-  final int completionTimeInSeconds;
+  int completionTimeInSeconds;
 
   @HiveField(3)
   final int movesTaken;
@@ -21,7 +21,7 @@ class GameStateModel {
 
   GameStateModel({
     required this.id,
-    required this.winLoss,
+    this.win = false,
     this.completionTimeInSeconds = 0,
     this.movesTaken = 0,
     required this.playedAt,

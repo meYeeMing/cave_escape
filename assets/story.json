@@ -2,8 +2,8 @@
 	"nodes": [
 		{
 			"nodeId": 0,
-			"text": "You wake .up in a dark cave with no memory of how you got here. Your head hurts and the air is damp and cold. A faint light flickers in the distance. What do you do?",
-			"imageId": 0,
+			"text": "You wake up in a dark cave with no memory of how you got here. Your head hurts and the air is damp and cold. A faint light flickers in the distance. What do you do?",
+			"imageId": 2,
 			"choices": [
 				{
 					"text": "Move toward the light",
@@ -22,7 +22,7 @@
 		{
 			"nodeId": 1,
 			"text": "You carefully move toward the light. As you get closer, you realize it's a small torch embedded in the cave wall. The path splits into three directions.",
-			"imageId": 0,
+			"imageId": 1,
 			"choices": [
 				{
 					"text": "Take the left path",
@@ -41,7 +41,7 @@
 		{
 			"nodeId": 2,
 			"text": "As you feel around in the darkness, your hand touches something cold and metallic. It's an old lantern! You also find some matches nearby.",
-			"imageId": 2,
+			"imageId": 3,
 			"choices": [
 				{
 					"text": "Light the lantern",
@@ -227,7 +227,7 @@
 		{
 			"nodeId": 12,
 			"text": "Following the stream, you notice it getting wider. The sound of rushing water grows louder. Soon, you arrive at an underground waterfall that drops into a large pool.",
-			"imageId": 12,
+			"imageId": 11,
 			"choices": [
 				{
 					"text": "Look for a way around the waterfall",
@@ -246,7 +246,7 @@
 		{
 			"nodeId": 13,
 			"text": "You find a narrow ledge that goes around the waterfall. It's slippery but passable with care. After making your way around, you find a small chamber with strange glowing mushrooms.",
-			"imageId": 13,
+			"imageId": 21,
 			"choices": [
 				{
 					"text": "Eat one of the glowing mushrooms immediately",
@@ -265,7 +265,7 @@
 		{
 			"nodeId": 14,
 			"text": "The carvings tell a story: ancient people used these caves for shelter during some catastrophe above ground. They depict a safe exit marked by three stalagmites forming a triangle.",
-			"imageId": 14,
+			"imageId": 12,
 			"choices": [
 				{
 					"text": "Look for the three stalagmites",
@@ -280,7 +280,7 @@
 		{
 			"nodeId": 15,
 			"text": "As you search, you find three large stalagmites arranged in a triangle. Beyond them, you feel a gentle breeze coming from a narrow crevice with natural light streaming through!",
-			"imageId": 15,
+			"imageId": 13,
 			"choices": [
 				{
 					"text": "Try to squeeze through the crevice",
@@ -299,7 +299,7 @@
 		{
 			"nodeId": 16,
 			"text": "As you take the red gem, it grows warm in your hand. Suddenly, the cavern begins to shake violently! The gem glows brighter and hotter, burning your hand.",
-			"imageId": 16,
+			"imageId": 17,
 			"choices": [
 				{
 					"text": "Drop the gem and run",
@@ -318,7 +318,7 @@
 		{
 			"nodeId": 17,
 			"text": "The blue gem feels cool to the touch. As you hold it, you hear the distant sound of running water and one of the tunnels begins to glow with a blue light.",
-			"imageId": 17,
+			"imageId": 18,
 			"choices": [
 				{
 					"text": "Follow the blue-lit path",
@@ -337,7 +337,7 @@
 		{
 			"nodeId": 18,
 			"text": "The green gem pulses with a gentle light. You feel a slight breeze from one of the tunnels, and moss on the walls begins to glow green, marking a path.",
-			"imageId": 18,
+			"imageId": 19,
 			"choices": [
 				{
 					"text": "Follow the green-lit path",
@@ -352,7 +352,7 @@
 		{
 			"nodeId": 19,
 			"text": "Behind the waterfall, you discover a hidden cavern with ancient stone steps leading upward. Following them, you eventually see daylight!",
-			"imageId": 19,
+			"imageId": 14,
 			"choices": [
 				{
 					"text": "Climb the steps to freedom",
@@ -371,7 +371,7 @@
 		{
 			"nodeId": 20,
 			"text": "Among the mining equipment, you find an old pickaxe and a miner's map. The map is faded, but you can make out a few key landmarks.",
-			"imageId": 20,
+			"imageId": 15,
 			"choices": [
 				{
 					"text": "Try to decipher the map carefully",
@@ -390,7 +390,7 @@
 		{
 			"nodeId": 100,
 			"text": "Congratulations! You've successfully escaped the cave. Fresh air fills your lungs as you step into the sunlight. Your adventure in the darkness has come to an end, but the memories of your clever decisions will remain.",
-			"imageId": 100,
+			"imageId": 16,
 			"choices": [
 				{
 					"text": "Play Again",
@@ -402,7 +402,7 @@
 		{
 			"nodeId": 999,
 			"text": "Unfortunately, your journey ends here. The cave has claimed another victim. But don't worry, you can always try again with different choices!",
-			"imageId": 99,
+			"imageId": 22,
 			"choices": [
 				{
 					"text": "Try Again",

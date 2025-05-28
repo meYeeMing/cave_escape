@@ -1,9 +1,8 @@
-import 'package:cave_escape/screens/game_screen.dart';
-import 'package:cave_escape/theme/app_styles.dart';
-import 'package:cave_escape/utils/asset_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:cave_escape/screens/game_play_screen.dart';
+import 'package:cave_escape/screens/game_state_screen.dart';
+import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/animations/fade_effect.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 import '../utils/logger.dart';
 
@@ -16,7 +15,6 @@ class GameHomeScreen extends StatefulWidget {
 
 class _GameHomeScreenState extends State<GameHomeScreen> {
   double _opacity = 0.0;
-  late final AudioPlayer _audioPlayer;
   bool _isHoveringStart = false;
   bool _isHoveringState = false;
 
@@ -24,9 +22,6 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
   void initState() {
     super.initState();
     // Fade in after build
-    _audioPlayer = AudioPlayer();
-    _audioPlayer.setReleaseMode(ReleaseMode.loop);
-    _audioPlayer.setVolume(0.4);
     Future.delayed(Duration(milliseconds: 100), () {
       setState(() {
         _opacity = 1.0;
@@ -34,7 +29,7 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
     });
   }
 
-  void _page_navigation(BuildContext context, String navigatorDestination) {
+  void _pageNavigation(BuildContext context, String navigatorDestination) {
     switch (navigatorDestination) {
       case 'newgame':
         Navigator.pushReplacement(
@@ -45,16 +40,12 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
       case 'gamestate':
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => GamePlayScreen()),
+          MaterialPageRoute(builder: (_) => GameStateScreen()),
         );
         break;
       default:
         logger.e('Unknown page: $navigatorDestination');
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => GameHomeScreen()),
-    );
   }
 
   @override
@@ -118,7 +109,7 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
                           onEnter: (_) => setState(() => _isHoveringStart = true),
                           onExit: (_) => setState(() => _isHoveringStart = false),
                           child: GestureDetector(
-                            onTap: () => _page_navigation(context, 'newgame'),
+                            onTap: () => _pageNavigation(context, 'newgame'),
                             child: Text(
                               'Start Game',
                               style: AppStyles.menuButtonText.copyWith(
@@ -137,7 +128,7 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
                           onEnter: (_) => setState(() => _isHoveringState = true),
                           onExit: (_) => setState(() => _isHoveringState = false),
                           child: GestureDetector(
-                            onTap: () => _page_navigation(context, 'newgame'),
+                            onTap: () => _pageNavigation(context, 'gamestate'),
                             child: Text(
                               'Game State',
                               style: AppStyles.menuButtonText.copyWith(
@@ -163,7 +154,6 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
     super.dispose();
   }
 }

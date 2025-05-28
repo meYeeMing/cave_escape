@@ -18,7 +18,7 @@ class GameStateModelAdapter extends TypeAdapter<GameStateModel> {
     };
     return GameStateModel(
       id: fields[0] as int,
-      winLoss: fields[1] as bool,
+      win: fields[1] as bool,
       completionTimeInSeconds: fields[2] as int,
       movesTaken: fields[3] as int,
       playedAt: fields[4] as DateTime,
@@ -32,7 +32,7 @@ class GameStateModelAdapter extends TypeAdapter<GameStateModel> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.winLoss)
+      ..write(obj.win)
       ..writeByte(2)
       ..write(obj.completionTimeInSeconds)
       ..writeByte(3)

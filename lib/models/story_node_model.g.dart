@@ -21,13 +21,15 @@ class StoryNodeModelAdapter extends TypeAdapter<StoryNodeModel> {
       text: fields[1] as String,
       imageId: fields[2] as int,
       choices: (fields[3] as List).cast<StoryChoiceModel>(),
+      isVictory: fields[4] as bool,
+      isGameOver: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, StoryNodeModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +37,11 @@ class StoryNodeModelAdapter extends TypeAdapter<StoryNodeModel> {
       ..writeByte(2)
       ..write(obj.imageId)
       ..writeByte(3)
-      ..write(obj.choices);
+      ..write(obj.choices)
+      ..writeByte(4)
+      ..write(obj.isVictory)
+      ..writeByte(5)
+      ..write(obj.isGameOver);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cave_escape/models/story_choice_model.dart';
 import 'package:cave_escape/utils/logger.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import '../models/image.dart';
 import '../models/game_state_model.dart';
@@ -84,7 +85,6 @@ class AssetLoader {
     List<GameStateModel> allRecords = gameBox.values.toList();
 
     _updateProgress();
-
   }
 
   StoryChoiceModel _parseChoice(Map<String, dynamic> json) {
@@ -104,6 +104,8 @@ class AssetLoader {
       text: json['text'],
       imageId: int.parse(json['imageId'].toString()),
       choices: choices,
+      isGameOver: json['isGameOver'] ?? false,
+      isVictory: json['isVictory'] ?? false,
     );
   }
 }

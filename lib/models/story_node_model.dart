@@ -17,11 +17,18 @@ class StoryNodeModel extends HiveObject {
   @HiveField(3)
   List<StoryChoiceModel> choices;
 
+  @HiveField(4)
+  bool isVictory;
+  
+  @HiveField(5)
+  bool isGameOver;
+
   StoryNodeModel({
     required this.id,
     required this.text,
     required this.imageId,
     required this.choices,
+    this.isVictory = false,
+    this.isGameOver = false,
   });
-
 }
