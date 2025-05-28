@@ -18,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool _fadeOut = false;
   bool _showWelcome = false;
   bool _fadeOutWelcome = false;
+  final double _fadeOutWelcomeValue = 0.0;
 
   @override
   void initState() {
@@ -144,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen> {
             FadeEffect(
               fadetype: FadeType.fadeInOut,
               fadeTrigger: _fadeOutWelcome,
-              endOpacity: 0.0,
+              endOpacity: _fadeOutWelcomeValue,
               duration: const Duration(milliseconds: 3000),
               child: const SplashWelcomeMessage(),
             ),
