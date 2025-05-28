@@ -1,24 +1,27 @@
 import 'package:cave_escape/models/game_state_model.dart';
 import 'package:cave_escape/models/story_node_model.dart';
-import 'package:cave_escape/screens/game_home_screen.dart';
+import 'package:cave_escape/models/image.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../models/image.dart';
+
 import 'logger.dart';
 
 class GameNodeLoader {
+  final Box<StoryNodeModel> nodeBox = Hive.box<StoryNodeModel>('nodeBox');
+  final Box<ImageMapping> imageBox = Hive.box<ImageMapping>('imageBox');
+  final Box<GameStateModel> gameStateBox = Hive.box<GameStateModel>('gameStateBox');
+
   Future<Map<String, dynamic>?> loadNode(int nodeId) async {
-    final nodeBox = await Hive.openBox<StoryNodeModel>('nodeBox');
     if (nodeId == 9999) {
-      logger.i('Game ended with node ID: $nodeId');
+      logger.d('Game ended with node ID: $nodeId , No NextNodeId');
       return null;
     }
     final node = nodeBox.get(nodeId);
     if (node == null) {
       return null;
     }
-    final imageFile =
-        node.imageId != null ? await getImagePath(node.imageId) : null;
+
+    final imageFile = await getImagePath(node.imageId);
     final nodeText = node.text;
     logger.d(
       'node: $node, text: $nodeText, imageFile: $imageFile, choices: ${node.choices}',
@@ -30,9 +33,8 @@ class GameNodeLoader {
       'choices': node.choices,
     };
   }
-
+  
   Future<String> getImagePath(int imageId) async {
-    final imageBox = await Hive.openBox<ImageMapping>('imageBox');
     final imageMapping = imageBox.get(imageId);
     if (imageMapping != null) {
       return 'assets/images/${imageMapping.imageFile}';
@@ -51,14 +53,12 @@ class GameNodeLoader {
   }
 
   Future<void> gameEndHandler(int nodeId, int gameId) async {
-    final nodeBox = await Hive.openBox<StoryNodeModel>('nodeBox');
-    final gameBox = await Hive.openBox<GameStateModel>('gameStateBox');
     GameStateModel? gameState;
     if (gameId == 0) {
       logger.e('Game ID is 0, The game encounter erro');
       return;
     } else {
-      gameState = gameBox.get(gameId);
+      gameState = gameStateBox.get(gameId);
       if (gameState == null) {
         logger.e('Game with ID $gameId not found');
         return;
@@ -72,25 +72,24 @@ class GameNodeLoader {
       return;
     } else {
       if (node.isVictory) {
-        gameState!.win = true;
+        gameState.win = true;
         logger.i('Game ended with victory at node: $nodeId');
       } else {
-        gameState!.win = false;
+        gameState.win = false;
         logger.i('Game ended with defeat at node: $nodeId');
       }
     }
     logger.i(
       'Game with ID $gameId ended with state: ${gameState.completionTimeInSeconds}',
     );
-    logger.i('Saving game state to game Id :${gameId}');
-    await gameBox.put(gameId, gameState);
+    logger.i('Saving game state to game Id :$gameId');
+    await gameStateBox.put(gameId, gameState);
   }
 
   Future<int> startGame(DateTime startTime) async {
-    final gameBox = await Hive.openBox<GameStateModel>('gameStateBox');
-    final gameId = gameBox.length + 1;
+    final gameId = gameStateBox.length;
     final gameState = GameStateModel(id: gameId, playedAt: startTime);
-    await gameBox.put(gameId, gameState);
+    await gameStateBox.put(gameId, gameState);
     logger.i('Game started with ID: $gameId at $startTime');
     return gameId;
   }

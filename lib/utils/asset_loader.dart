@@ -1,16 +1,20 @@
 import 'dart:convert';
+import 'package:cave_escape/models/game_state_model.dart';
 import 'package:cave_escape/models/story_choice_model.dart';
 import 'package:cave_escape/utils/logger.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import '../models/image.dart';
-import '../models/game_state_model.dart';
 import '../models/story_node_model.dart';
 
 class AssetLoader {
   final List<void Function(double)> progressCallbacks = [];
   static String? cachedCaveSoundPath;
+  final Box<StoryNodeModel> nodeBox = Hive.box<StoryNodeModel>('nodeBox');
+  final Box<ImageMapping> imageBox = Hive.box<ImageMapping>('imageBox');
+  final Box<GameStateModel> gameStateBox = Hive.box<GameStateModel>(
+    'gameStateBox',
+  );
 
   void addProgressCallback(void Function(double) callback) {
     progressCallbacks.add(callback);
@@ -31,7 +35,7 @@ class AssetLoader {
   Future<void> loadAllAssets([void Function(double)? onProgress]) async {
     if (onProgress != null) addProgressCallback(onProgress);
 
-    _totalTasks = 10;
+    _totalTasks = 7;
     _progress = 0.0;
     _completedTasks = 0;
 
@@ -50,11 +54,9 @@ class AssetLoader {
     _updateProgress();
 
     //load game image list
-    logger.i('load image to hive');
+    logger.i('load image');
     final imageListJson = await rootBundle.loadString('assets/image_list.json');
     final imageJson = jsonDecode(imageListJson)['imageList'];
-    _updateProgress();
-    final imageBox = await Hive.openBox<ImageMapping>('imageBox');
     _updateProgress();
     for (var item in imageJson) {
       await imageBox.put(
@@ -66,24 +68,14 @@ class AssetLoader {
     _updateProgress();
 
     //load story node
-    logger.i('load story node to hive');
+    logger.i('load story node');
     final nodeString = await rootBundle.loadString('assets/story.json');
     final nodeJson = jsonDecode(nodeString)['nodes'];
     _updateProgress();
-    final nodeBox = await Hive.openBox<StoryNodeModel>('nodeBox');
-    _updateProgress();
-    //total 23 nodes
     for (var nodeJson in nodeJson) {
       final node = _parseNode(nodeJson);
       await nodeBox.put(node.id, node);
     }
-    _updateProgress();
-
-    logger.i('check any game state in hive.');
-    final gameBox = await Hive.openBox<GameStateModel>('gameStateBox');
-    bool hasData = gameBox.isNotEmpty;
-    List<GameStateModel> allRecords = gameBox.values.toList();
-
     _updateProgress();
   }
 

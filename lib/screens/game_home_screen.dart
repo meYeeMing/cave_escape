@@ -1,10 +1,7 @@
+import 'package:cave_escape/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:cave_escape/screens/game_play_screen.dart';
-import 'package:cave_escape/screens/game_state_screen.dart';
 import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/animations/fade_effect.dart';
-
-import '../utils/logger.dart';
 
 class GameHomeScreen extends StatefulWidget {
   const GameHomeScreen({super.key});
@@ -27,25 +24,6 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
         _opacity = 1.0;
       });
     });
-  }
-
-  void _pageNavigation(BuildContext context, String navigatorDestination) {
-    switch (navigatorDestination) {
-      case 'newgame':
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => GamePlayScreen()),
-        );
-        break;
-      case 'gamestate':
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => GameStateScreen()),
-        );
-        break;
-      default:
-        logger.e('Unknown page: $navigatorDestination');
-    }
   }
 
   @override
@@ -106,10 +84,12 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: MouseRegion(
-                          onEnter: (_) => setState(() => _isHoveringStart = true),
-                          onExit: (_) => setState(() => _isHoveringStart = false),
+                          onEnter:
+                              (_) => setState(() => _isHoveringStart = true),
+                          onExit:
+                              (_) => setState(() => _isHoveringStart = false),
                           child: GestureDetector(
-                            onTap: () => _pageNavigation(context, 'newgame'),
+                            onTap: () => Utils.pageNavigation(context, 'newgame'),
                             child: Text(
                               'Start Game',
                               style: AppStyles.menuButtonText.copyWith(
@@ -125,10 +105,12 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: MouseRegion(
-                          onEnter: (_) => setState(() => _isHoveringState = true),
-                          onExit: (_) => setState(() => _isHoveringState = false),
+                          onEnter:
+                              (_) => setState(() => _isHoveringState = true),
+                          onExit:
+                              (_) => setState(() => _isHoveringState = false),
                           child: GestureDetector(
-                            onTap: () => _pageNavigation(context, 'gamestate'),
+                            onTap: () => Utils.pageNavigation(context, 'gamestate'),
                             child: Text(
                               'Game State',
                               style: AppStyles.menuButtonText.copyWith(

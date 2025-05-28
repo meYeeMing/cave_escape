@@ -1,6 +1,6 @@
-import 'package:cave_escape/screens/game_home_screen.dart';
 import 'package:cave_escape/utils/asset_loader.dart';
 import 'package:cave_escape/utils/logger.dart';
+import 'package:cave_escape/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cave_escape/animations/fade_effect.dart';
 import 'package:cave_escape/theme/app_styles.dart';
@@ -8,6 +8,7 @@ import 'package:cave_escape/widgets/splash_welcome_message.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -26,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _loadAssets() async {
     final loader = AssetLoader();
-
     await loader.loadAllAssets((double progress) {
+      logger.d('Current Progress: $progress');
       setState(() {
         _progress = progress;
         if (_progress == 1.0) {
@@ -35,21 +36,23 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       });
     });
-    await Future.delayed(const Duration(milliseconds: 1000));
 
+    await Future.delayed(const Duration(milliseconds: 1000));
     setState(() {
       _showWelcome = true;
     });
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 4));
     setState(() {
       _fadeOutWelcome = true; // Make sure fade out is not triggered yet
     });
-    await Future.delayed(const Duration(seconds: 3));
-    logger.i('All assets loaded successfully! Navigateing to GameHomeScreen...');
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => GameHomeScreen()),
+    await Future.delayed(const Duration(seconds: 2));
+    logger.i(
+      'All assets loaded successfully! Navigateing to GameHomeScreen...',
     );
+    if (!mounted) {
+      return;
+    }
+    Utils.pageNavigation(context, 'gamehome');
   }
 
   @override

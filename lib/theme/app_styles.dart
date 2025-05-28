@@ -32,7 +32,6 @@ class AppStyles {
     fontSize: 45,
     color: AppColors.accentGold,
   );
-
   static const TextStyle subTitle = TextStyle(
     fontFamily: 'Cavestone',
     fontSize: 20,
@@ -58,5 +57,15 @@ class AppStyles {
     fontFamily: 'Cavestone',
     fontSize: 28,
     color: AppColors.accentGold,
+  );
+  static const TextStyle tableHeader = TextStyle(
+    fontFamily: 'Cavestone',
+    fontSize: 20,
+    color: AppColors.accentGold,
+  );
+    static const TextStyle tableText = TextStyle(
+    fontFamily: 'Cavestone',
+    fontSize: 16,
+    color: AppColors.brigterParchment,
   );
 }

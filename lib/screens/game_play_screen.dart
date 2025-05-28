@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:cave_escape/screens/game_home_screen.dart';
 import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/utils/game_node_loader.dart';
+import 'package:cave_escape/utils/utils.dart';
 import 'package:cave_escape/widgets/choice_button.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +14,12 @@ class GamePlayScreen extends StatefulWidget {
 
 class _GamePlayScreen extends State<GamePlayScreen> {
   bool _showStartImage = true;
-  final GameNodeLoader _gameNodeLoader = GameNodeLoader();
   Map<String, dynamic>? _nodeData;
   int? _currentNodeId;
   int? _gameId;
+
+  final GameNodeLoader _gameNodeLoader = GameNodeLoader();
+
 
   @override
   void initState() {
@@ -29,11 +31,14 @@ class _GamePlayScreen extends State<GamePlayScreen> {
   void dispose() {
     super.dispose();
   }
-  
+
   Future<void> _startGame() async {
     _gameId = await _gameNodeLoader.startGame(DateTime.now());
+    if (!mounted) return;
     await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
     _nodeData = await _gameNodeLoader.loadNode(0);
+    if (!mounted) return;
     setState(() {
       _showStartImage = false;
     });
@@ -96,7 +101,7 @@ class _GamePlayScreen extends State<GamePlayScreen> {
                                   horizontal: 32.0,
                                   vertical: 16.0,
                                 ),
-                                color: AppColors.rock.withOpacity(0.7),
+                                color: AppColors.rock.withValues(alpha: 0.7),
                                 child: Text(
                                   _nodeData?['text'] ?? '',
                                   style: AppStyles.nodeText,
@@ -120,16 +125,14 @@ class _GamePlayScreen extends State<GamePlayScreen> {
                                           choice.nextNodeId == 9999) {
                                         await _gameNodeLoader.gameEndHandler(
                                           _currentNodeId!,
-                                          _gameId!
+                                          _gameId!,
                                         );
                                         await Future.delayed(
-                                          const Duration(seconds: 1),
+                                          const Duration(milliseconds: 500),
                                         );
-                                        Navigator.pushReplacement(
+                                        Utils.pageNavigation(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (_) => GameHomeScreen(),
-                                          ),
+                                          'gamehome',
                                         );
                                         return;
                                       }

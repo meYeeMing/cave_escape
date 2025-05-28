@@ -5,8 +5,7 @@ class ChoiceButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const ChoiceButton({Key? key, required this.text, required this.onPressed})
-    : super(key: key);
+  const ChoiceButton({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class ChoiceButton extends StatelessWidget {
             Set<WidgetState> states,
           ) {
             if (states.contains(WidgetState.hovered)) {
-              return AppColors.stone.withOpacity(0.85);
+              return AppColors.stone.withValues(alpha: 0.85);
             }
             return AppColors.stone;
           }),
@@ -38,7 +37,7 @@ class ChoiceButton extends StatelessWidget {
           elevation: WidgetStateProperty.all(4),
           textStyle: WidgetStateProperty.all(AppStyles.buttonText),
           overlayColor: WidgetStateProperty.all(
-            AppColors.accentGold.withOpacity(0.15),
+            AppColors.accentGold.withAlpha(15),
           ),
         ),
         onPressed: onPressed,
