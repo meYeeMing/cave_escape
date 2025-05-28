@@ -35,6 +35,19 @@ class _GameStateScreenState extends State<GameStateScreen> {
     super.dispose();
   }
 
+  List sortGameState() {
+    final gameStates = gameStateBox.values.toList();
+    gameStates.sort((a, b) {
+      if (a.win != b.win) {
+        return b.win ? 1 : -1; // win=true first
+      }
+      return (a.completionTimeInSeconds ?? 0).compareTo(
+        b.completionTimeInSeconds ?? 0,
+      );
+    });
+    return gameStates;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +69,8 @@ class _GameStateScreenState extends State<GameStateScreen> {
             Expanded(
               child: Builder(
                 builder: (context) {
-                  final gameStates = gameStateBox.values.toList();
+                  final gameStates = sortGameState();
+
                   if (gameStates.isEmpty) {
                     return const Center(child: Text('No game state found.'));
                   }
