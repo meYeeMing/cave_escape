@@ -55,7 +55,7 @@ class GameNodeLoader {
   Future<void> gameEndHandler(int nodeId, int gameId) async {
     GameStateModel? gameState;
     if (gameId == 0) {
-      logger.e('Game ID is 0, The game encounter erro');
+      logger.e('Game ID is 0, The game encounter error');
       return;
     } else {
       gameState = gameStateBox.get(gameId);

@@ -112,7 +112,7 @@ class _GameStateScreenState extends State<GameStateScreen> {
                                     DataCell(
                                       Center(
                                         child: Text(
-                                          '${gameState.id}+1',
+                                          '${gameState.id + 1}',
                                           style: AppStyles.tableText,
                                         ),
                                       ),
