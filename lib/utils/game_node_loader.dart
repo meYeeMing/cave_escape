@@ -9,22 +9,27 @@ import 'logger.dart';
 class GameNodeLoader {
   final Box<StoryNodeModel> nodeBox = Hive.box<StoryNodeModel>('nodeBox');
   final Box<ImageMapping> imageBox = Hive.box<ImageMapping>('imageBox');
-  final Box<GameStateModel> gameStateBox = Hive.box<GameStateModel>('gameStateBox');
+  final Box<GameStateModel> gameStateBox = Hive.box<GameStateModel>(
+    'gameStateBox',
+  );
 
   Future<Map<String, dynamic>?> loadNode(int nodeId) async {
     if (nodeId == 9999) {
       logger.d('Game ended with node ID: $nodeId , No NextNodeId');
       return null;
     }
+
     final node = nodeBox.get(nodeId);
+    logger.i('loading $nodeId detail');
     if (node == null) {
+      logger.e('$nodeId does not found any node detail');
       return null;
     }
 
     final imageFile = await getImagePath(node.imageId);
     final nodeText = node.text;
     logger.d(
-      'node: $node, text: $nodeText, imageFile: $imageFile, choices: ${node.choices}',
+      'node: ${node.id}, text: $nodeText, imageFile: $imageFile, choices: ${node.choices.length}',
     );
     return {
       'node': node,
@@ -33,7 +38,7 @@ class GameNodeLoader {
       'choices': node.choices,
     };
   }
-  
+
   Future<String> getImagePath(int imageId) async {
     final imageMapping = imageBox.get(imageId);
     if (imageMapping != null) {
@@ -52,11 +57,10 @@ class GameNodeLoader {
     return await loadNode(nextNodeId);
   }
 
-  Future<void> gameEndHandler(int nodeId, int gameId) async {
+  Future<void> gameEndHandler(int nodeId, int? gameId) async {
     GameStateModel? gameState;
-    if (gameId == 0) {
-      logger.e('Game ID is 0, The game encounter error');
-      return;
+    if (gameId == null) {
+      logger.e('$gameId is null, The game encounter error');
     } else {
       gameState = gameStateBox.get(gameId);
       if (gameState == null) {
@@ -72,18 +76,18 @@ class GameNodeLoader {
       return;
     } else {
       if (node.isVictory) {
-        gameState.win = true;
+        gameState?.win = true;
         logger.i('Game ended with victory at node: $nodeId');
       } else {
-        gameState.win = false;
+        gameState?.win = false;
         logger.i('Game ended with defeat at node: $nodeId');
       }
     }
     logger.i(
-      'Game with ID $gameId ended with state: ${gameState.completionTimeInSeconds}',
+      'Game with ID $gameId ended with state: ${gameState?.completionTimeInSeconds}',
     );
     logger.i('Saving game state to game Id :$gameId');
-    await gameStateBox.put(gameId, gameState);
+    await gameStateBox.put(gameId, gameState!);
   }
 
   Future<int> startGame(DateTime startTime) async {
