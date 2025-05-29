@@ -3,6 +3,7 @@ import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/utils/logger.dart';
 import 'package:cave_escape/utils/utils.dart';
 import 'package:cave_escape/widgets/choice_button.dart';
+import 'package:cave_escape/widgets/game_state_table.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -31,7 +32,6 @@ class _GameStateScreenState extends State<GameStateScreen> {
 
   @override
   void dispose() {
-    // Do not close the box here if you use it elsewhere in the app!
     super.dispose();
   }
 
@@ -41,9 +41,7 @@ class _GameStateScreenState extends State<GameStateScreen> {
       if (a.win != b.win) {
         return b.win ? 1 : -1; // win=true first
       }
-      return a.completionTimeInSeconds.compareTo(
-        b.completionTimeInSeconds,
-      );
+      return a.completionTimeInSeconds.compareTo(b.completionTimeInSeconds);
     });
     return gameStates;
   }
@@ -69,99 +67,12 @@ class _GameStateScreenState extends State<GameStateScreen> {
             Expanded(
               child: Builder(
                 builder: (context) {
-                  final gameStates = sortGameState();
+                  final gameStates = sortGameState().cast<GameStateModel>();
 
                   if (gameStates.isEmpty) {
                     return const Center(child: Text('No game state found.'));
                   }
-
-                  return Align(
-                    alignment: Alignment.topCenter,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: SingleChildScrollView(
-                        child: DataTable(
-                          headingRowColor: WidgetStateProperty.all(
-                            AppColors.rock.withValues(alpha: 0.7),
-                          ),
-                          columnSpacing: 60,
-                          columns: const [
-                            DataColumn(
-                              label: Center(
-                                child: Text(
-                                  'Game #',
-                                  style: AppStyles.tableHeader,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Center(
-                                child: Text(
-                                  'Win',
-                                  style: AppStyles.tableHeader,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Center(
-                                child: Text(
-                                  'Completion Time',
-                                  style: AppStyles.tableHeader,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Center(
-                                child: Text(
-                                  'Played At',
-                                  style: AppStyles.tableHeader,
-                                ),
-                              ),
-                            ),
-                          ],
-                          rows:
-                              gameStates.map((gameState) {
-                                return DataRow(
-                                  cells: [
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${gameState.id + 1}',
-                                          style: AppStyles.tableText,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          gameState.win ? 'Win' : 'Loss',
-                                          style: AppStyles.tableText,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${gameState.completionTimeInSeconds} Seconds',
-                                          style: AppStyles.tableText,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          Utils.formatDate(gameState.playedAt),
-                                          style: AppStyles.tableText,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }).toList(),
-                        ),
-                      ),
-                    ),
-                  );
+                  return GameStateTable(gameStates: gameStates);      
                 },
               ),
             ),
