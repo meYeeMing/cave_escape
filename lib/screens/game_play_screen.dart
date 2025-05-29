@@ -20,7 +20,6 @@ class _GamePlayScreen extends State<GamePlayScreen> {
 
   final GameNodeLoader _gameNodeLoader = GameNodeLoader();
 
-
   @override
   void initState() {
     super.initState();
@@ -66,11 +65,10 @@ class _GamePlayScreen extends State<GamePlayScreen> {
         child: Column(
           children: [
             Center(
-              child: FittedBox(
-                fit: BoxFit.contain,
+              child: Center(
                 child: SizedBox(
                   width: 1000,
-                  height: 1280,
+                  height: MediaQuery.of(context).size.height,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
@@ -88,7 +86,7 @@ class _GamePlayScreen extends State<GamePlayScreen> {
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: EdgeInsets.only(
-                            bottom: 100.0,
+                            bottom: MediaQuery.of(context).size.height * 0.1,
                             left: MediaQuery.of(context).size.width * 0.1,
                             right: MediaQuery.of(context).size.width * 0.1,
                           ),
@@ -108,7 +106,7 @@ class _GamePlayScreen extends State<GamePlayScreen> {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 15),
                               ...?_nodeData?['choices']?.map<Widget>(
                                 (choice) => Padding(
                                   padding: const EdgeInsets.symmetric(
