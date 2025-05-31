@@ -86,6 +86,7 @@ class _GamePlayScreen extends State<GamePlayScreen> {
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.05,
                             bottom: MediaQuery.of(context).size.height * 0.1,
                             left: MediaQuery.of(context).size.width * 0.1,
                             right: MediaQuery.of(context).size.width * 0.1,

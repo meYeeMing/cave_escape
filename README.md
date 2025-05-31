@@ -17,7 +17,7 @@ The games also includes the best completion time system to challenge players to 
 **Prerequisites**
 Flutter SDK (>= 3.x)
 Dart SDK
-Device or Emulator
+web
 
 ### Installation
 
@@ -25,7 +25,11 @@ Device or Emulator
 git clone https://github.com/meYeeMing/cave_escape.git
 cd cave-adventure
 flutter pub get
-flutter run
+```
+
+Running the application under the web
+```
+flutter run -d chrome
 ```
 
 ## Configuration 

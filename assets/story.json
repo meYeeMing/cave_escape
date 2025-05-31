@@ -369,25 +369,6 @@
 			]
 		},
 		{
-			"nodeId": 20,
-			"text": "Among the mining equipment, you find an old pickaxe and a miner's map. The map is faded, but you can make out a few key landmarks.",
-			"imageId": 15,
-			"choices": [
-				{
-					"text": "Try to decipher the map carefully",
-					"nextNodeId": 9
-				},
-				{
-					"text": "Start swinging the pickaxe wildly at the walls",
-					"nextNodeId": 999
-				},
-				{
-					"text": "Start swinging the pickaxe wildly at the walls",
-					"nextNodeId": 7
-				}
-			]
-		},
-		{
 			"nodeId": 100,
 			"text": "Congratulations! You've successfully escaped the cave. Fresh air fills your lungs as you step into the sunlight. Your adventure in the darkness has come to an end, but the memories of your clever decisions will remain.",
 			"imageId": 16,
