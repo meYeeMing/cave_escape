@@ -35,7 +35,7 @@ class AssetLoader {
   Future<void> loadAllAssets([void Function(double)? onProgress]) async {
     if (onProgress != null) addProgressCallback(onProgress);
 
-    _totalTasks = 7;
+    _totalTasks = 28;
     _progress = 0.0;
     _completedTasks = 0;
 
@@ -50,7 +50,7 @@ class AssetLoader {
     // Preload logo image
     await rootBundle.load(
       'assets/images/game_logo.webp',
-    ); // Change path if needed
+    ); 
     _updateProgress();
 
     //load game image list
@@ -75,8 +75,9 @@ class AssetLoader {
     for (var nodeJson in nodeJson) {
       final node = _parseNode(nodeJson);
       await nodeBox.put(node.id, node);
+      _updateProgress();
     }
-    _updateProgress();
+    
   }
 
   StoryChoiceModel _parseChoice(Map<String, dynamic> json) {

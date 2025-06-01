@@ -94,7 +94,7 @@ class GameNodeLoader {
     final gameId = gameStateBox.length;
     final gameState = GameStateModel(id: gameId, playedAt: startTime);
     await gameStateBox.put(gameId, gameState);
-    logger.i('Game started with ID: $gameId at $startTime');
+    logger.i('A new game started with ID: $gameId at $startTime');
     return gameId;
   }
 }

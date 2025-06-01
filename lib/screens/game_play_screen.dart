@@ -4,6 +4,7 @@ import 'package:cave_escape/utils/game_node_loader.dart';
 import 'package:cave_escape/utils/utils.dart';
 import 'package:cave_escape/widgets/choice_button.dart';
 import 'package:flutter/material.dart';
+import 'package:cave_escape/animations/fade_effect.dart';
 
 class GamePlayScreen extends StatefulWidget {
   const GamePlayScreen({super.key});
@@ -19,6 +20,7 @@ class _GamePlayScreen extends State<GamePlayScreen> {
   int? _gameId;
 
   final GameNodeLoader _gameNodeLoader = GameNodeLoader();
+  bool _gameStartFadeTrigger =false;
 
   @override
   void initState() {
@@ -33,8 +35,11 @@ class _GamePlayScreen extends State<GamePlayScreen> {
 
   Future<void> _startGame() async {
     _gameId = await _gameNodeLoader.startGame(DateTime.now());
+    setState(() {
+      _gameStartFadeTrigger=true;
+    });
     if (!mounted) return;
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
     _nodeData = await _gameNodeLoader.loadNode(0);
     if (!mounted) return;
@@ -48,9 +53,15 @@ class _GamePlayScreen extends State<GamePlayScreen> {
     if (_showStartImage) {
       return Scaffold(
         body: Center(
-          child: Image.asset(
-            'assets/images/game_start.webp',
-            fit: BoxFit.cover,
+          child: FadeEffect(
+            fadetype: FadeType.fadeInOut,
+            endOpacity: 0.0,
+            fadeTrigger: _gameStartFadeTrigger,
+            duration: const Duration(milliseconds: 2000),
+            child: Image.asset(
+              'assets/images/game_start.webp',
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       );
