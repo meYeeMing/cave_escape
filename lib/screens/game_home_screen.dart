@@ -1,4 +1,4 @@
-import 'package:cave_escape/utils/utils.dart';
+import 'package:cave_escape/widgets/menu_text.dart';
 import 'package:flutter/material.dart';
 import 'package:cave_escape/theme/app_styles.dart';
 import 'package:cave_escape/animations/fade_effect.dart';
@@ -12,8 +12,6 @@ class GameHomeScreen extends StatefulWidget {
 
 class _GameHomeScreenState extends State<GameHomeScreen> {
   double _opacity = 0.0;
-  bool _isHoveringStart = false;
-  bool _isHoveringState = false;
 
   @override
   void initState() {
@@ -83,44 +81,16 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
                       const SizedBox(width: 50, height: 600),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: MouseRegion(
-                          onEnter:
-                              (_) => setState(() => _isHoveringStart = true),
-                          onExit:
-                              (_) => setState(() => _isHoveringStart = false),
-                          child: GestureDetector(
-                            onTap: () => Utils.pageNavigation(context, 'newgame'),
-                            child: Text(
-                              'Start Game',
-                              style: AppStyles.menuButtonText.copyWith(
-                                color:
-                                    _isHoveringStart
-                                        ? AppColors.glowCyan
-                                        : AppStyles.menuButtonText.color,
-                              ),
-                            ),
-                          ),
+                        child: const MenuText(
+                          text: "Start Game",
+                          navigatorDestination: "newgame",
                         ),
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: MouseRegion(
-                          onEnter:
-                              (_) => setState(() => _isHoveringState = true),
-                          onExit:
-                              (_) => setState(() => _isHoveringState = false),
-                          child: GestureDetector(
-                            onTap: () => Utils.pageNavigation(context, 'gamestate'),
-                            child: Text(
-                              'Game State',
-                              style: AppStyles.menuButtonText.copyWith(
-                                color:
-                                    _isHoveringState
-                                        ? AppColors.glowCyan
-                                        : AppStyles.menuButtonText.color,
-                              ),
-                            ),
-                          ),
+                        child: const MenuText(
+                          text: "Game State",
+                          navigatorDestination: "gamestate",
                         ),
                       ),
                     ],
