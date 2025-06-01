@@ -23,7 +23,7 @@ web
 
 ```
 git clone https://github.com/meYeeMing/cave_escape.git
-cd cave-adventure
+cd cave_escape
 flutter pub get
 ```
 
