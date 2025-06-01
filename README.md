@@ -29,7 +29,7 @@ flutter pub get
 
 Running the application under the web
 ```
-flutter run -d chrome
+flutter run --release -d chrome
 ```
 
 ## Configuration 
