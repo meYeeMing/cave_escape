@@ -78,7 +78,7 @@
 			"choices": [
 				{
 					"text": "Drink greedily from the stream without checking for impurities",
-					"nextNodeId": 999
+					"nextNodeId": 11
 				},
 				{
 					"text": "Follow the stream's direction",
